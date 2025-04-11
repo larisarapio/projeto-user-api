@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model User {
+  id       Int       @id
+  name     String?   @db.Char(1)
+  email    String?   @db.Char(1)
+  password String?   @db.Char(1)
+  createAt DateTime? @db.Timestamptz(6)
+  updateAt DateTime? @db.Timestamptz(6)
+
+  @@ignore
+  @@map("users")
+}

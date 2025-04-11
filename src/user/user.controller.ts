@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   Body,
   Controller,
@@ -9,22 +7,24 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { CreateUserDTO } from './dto/create-user.dto';
 
 @Controller()
 export class UserController {
+
   @Get()
-  getUser() {
+  async getUser() {
     const user = {};
     return user;
   }
 
   @Post()
-  createUser(@Body() body) {
-    return body;
+  async createUser(@Body() {email, name, password}: CreateUserDTO) {
+    return {email,name,password};
   }
 
   @Patch(':id')
-  updateUser(@Param('id') id: string, @Body() body) {
+  async updateUser(@Param('id') id: string, @Body() body) {
     return {
       message: `Usuário ${id} atualizado!`,
       data: body,
@@ -32,7 +32,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: string, @Body() body) {
+  async deleteUser(@Param('id') id: string, @Body() body) {
     return {
       message: `Usuário ${id} deletado!`,
       data: body,
