@@ -8,9 +8,12 @@ import {
   Post,
 } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
+import { UserService } from './user.service';
 
-@Controller()
+@Controller("/users")
 export class UserController {
+
+  constructor(private readonly userService: UserService) {}
 
   @Get()
   async getUser() {
@@ -19,8 +22,8 @@ export class UserController {
   }
 
   @Post()
-  async createUser(@Body() {email, name, password}: CreateUserDTO) {
-    return {email,name,password};
+  async createUser(@Body() data: CreateUserDTO) {
+    return this.userService.createUse(data);
   }
 
   @Patch(':id')

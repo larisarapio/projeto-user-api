@@ -7,4 +7,4 @@ import { PrismaService } from "./prisma.service";
   //qm usar esse módulo vai ter acesso a isso
   exports: [PrismaService]
 })
-export class PrismaModul {}
+export class PrismaModule {}
