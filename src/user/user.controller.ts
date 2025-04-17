@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -16,9 +17,13 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  async getUser() {
-    const user = {};
-    return user;
+  async list() {
+    return this.userService.list();
+  }
+
+  @Get(':id')
+  async show(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.show(id);
   }
 
   @Post()
