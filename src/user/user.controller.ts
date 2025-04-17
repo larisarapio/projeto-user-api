@@ -38,12 +38,8 @@ export class UserController {
       return this.userService.update(id, data);
   }
 
-
   @Delete(':id')
-  async deleteUser(@Param('id') id: string, @Body() body) {
-    return {
-      message: `Usuário ${id} deletado!`,
-      data: body,
-    };
+  async deleteUser(@Param('id', ParseIntPipe) id: number, @Body() body) {
+    return this.userService.deleteUser(id);
   }
 }
