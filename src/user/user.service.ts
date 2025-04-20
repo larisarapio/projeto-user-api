@@ -8,14 +8,10 @@ export class UserService {
 
     constructor(private readonly prisma: PrismaService) {}
 
-    async createUse ({email, name, password}: CreateUserDTO) {
+    async createUse (data: CreateUserDTO) {
         
         return this.prisma.user.create({
-            data: {
-                email,
-                name, 
-                password
-            },
+            data,
         });
     }
 
