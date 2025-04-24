@@ -29,7 +29,7 @@ export class UserController {
 
   @Post()
   async createUser(@Body() data: CreateUserDTO) {
-    return this.userService.createUse(data);
+    return this.userService.createUser(data);
   }
 
   @Patch(':id')
