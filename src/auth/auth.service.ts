@@ -32,11 +32,10 @@ export class AuthService {
   }
 
   async checkToken(token: string) {
-    // try {
-    //   return await this.jwtService.verifyAsync(token); // Melhor usar verifyAsync
-    // } catch (err) {
-    //   throw new Error('Invalid token');
-    // }
+    return this.jwtService.verify(token, {
+      audience: 'users',
+      issuer: 'login',
+    })
   }
 
   async login(email: string, password: string){
