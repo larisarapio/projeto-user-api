@@ -7,11 +7,17 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards
 } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { UpdateUserDTO } from './dto/update-user.dto';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/enums/role.enum';
+import { RoleGuard } from 'src/guards/role.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
 
+@UseGuards(AuthGuard, RoleGuard)
 @Controller("/users")
 export class UserController {
 
@@ -27,6 +33,7 @@ export class UserController {
     return this.userService.show(id);
   }
 
+  @Roles(Role.Admin)
   @Post()
   async createUser(@Body() data: CreateUserDTO) {
     return this.userService.createUser(data);
