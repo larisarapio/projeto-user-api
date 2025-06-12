@@ -6,6 +6,7 @@ import { AuthResetDTO } from "./dto/auth-reset.dto";
 import { AuthService } from "./auth.service";
 import { AuthGuard } from "src/guards/auth.guard";
 import { User } from "src/decorators/user.decorator";
+import { Throttle, ThrottlerGuard } from "@nestjs/throttler";
 
 @Controller('auth')
 export class AuthController{
@@ -14,6 +15,7 @@ export class AuthController{
         private readonly authService: AuthService
     ) {}
 
+   
     @Post('login')
     async login(@Body() {email, password}: AuthLoginDTO) {
         return this.authService.login(email, password);
